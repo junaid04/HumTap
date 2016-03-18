@@ -9,9 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    //Outlets
+
     @IBOutlet weak var circle: UIView!
+    
     @IBOutlet weak var object1: UIView!
     @IBOutlet weak var object2: UIView!
     @IBOutlet weak var object3: UIView!
@@ -22,16 +22,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var counterView: UIView!
     @IBOutlet weak var userIconView: UIView!
     @IBOutlet weak var audioView: UIView!
+    
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewContainer: UIView!
     @IBOutlet weak var exploreViewContainer: UIView!
     @IBOutlet weak var exploreCollectionView: UICollectionView!
+    
     @IBOutlet weak var counterLabel: UILabel!
+    
+    
+    
     @IBOutlet weak var segmentSelector: UISegmentedControl!
+    
+    
+    
+    
     @IBOutlet var pen: UIPanGestureRecognizer!
+    
+    
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
-
+    
+    
+    
     // bounadries variable
     var object1MinX : CGFloat?
     var object1MaxX : CGFloat?
@@ -66,15 +80,25 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var counter = 3
     var timer = NSTimer()
 
+    
+    
+    
+    
+
+
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-      
+        
+
+        
     }
     
     override func viewWillAppear(animated: Bool) {
-     
+        
+        
         roundObjects(circle)
         roundObjects(object1)
         roundObjects(object2)
@@ -87,16 +111,31 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         roundObjects(audioView)
         roundObjects(searchView)
         
+        
+        
+        
+        
         circle.layer.borderColor = UIColor.blackColor().CGColor
         circle.layer.borderWidth = 2
         roundView.layer.borderColor = UIColor.blackColor().CGColor
         roundView.layer.borderWidth = 2
         //collectionView.hidden = true
- 
+        
+        
         objectHide()
         collectionViewContainer.hidden = true
+        
+        
         circle.hidden = false
-
+        
+        
+        
+       
+        
+        
+        
+        
+        
         //boundaries
         object1MinX = object1.frame.minX
         object1MaxX = object1.frame.maxX
@@ -128,7 +167,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         object6MinY = object6.frame.minY
         object6MaxY = object6.frame.maxY
     }
-
+    
+    
+    
+    
     
     @IBAction func segmentControlEvent(sender: AnyObject) {
         
@@ -154,7 +196,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             
             
         }
-        
         if segmentSelector.selectedSegmentIndex == 2 {
             objectHide()
             segmentSelector.setTitle("Music", forSegmentAtIndex: 1)
@@ -184,28 +225,33 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         circle.bounds.size.width = 60
         circle.bounds.size.height = 60
         roundObjects(circle)
- 
+        
+        
+        
     }
-   
+    
+    
+    
     
     @IBAction func collectionViewCancelEvent(sender: AnyObject) {
- 
+        
+       
+
                 UIView.animateWithDuration(1.0, animations: {
             
             self.collectionViewContainer.center.y += self.view.center.y
             self.objectAnimate(self.searchTextField, x: 250, y: 5, width: 20, height: 30)
- 
+            
+                
+        
         
         })
         
         if object4.center == self.view.center {
         
         swapping(object4, subObject: circle)
-        
         }
-            
         else {
-            
             swapping(object3, subObject: circle)
         }
         
@@ -214,15 +260,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         circle.bounds.size.height = 70
         circle.bounds.size.width = 70
         roundObjects(circle)
-    
+        
+        
+        
     }
     
     @IBAction func touchUpEvent(sender: AnyObject) {
-    
+        
+        
         objectHide()
         circle.hidden = false
         animateCircle(self.circle, height: 70, width: 70)
- 
+        
+        
+        
     }
     
     
@@ -233,17 +284,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
     }
     
-
-    @IBAction func penGesture(sender: AnyObject) {
    
+    
+    
+    
+    
+    @IBAction func penGesture(sender: AnyObject) {
+        
+        
+        
+        
         let moveCircle = sender.locationInView(self.view)
         
         if pen.state == .Changed {
-            
         circle.center = moveCircle
-            
         }
-  
+        
+       
+        
+        
+       
+        
+        
+        
+        
         if pen.state == .Ended {
         
             
@@ -259,21 +323,32 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 counterLabel.text = String(counter)
                 
                 timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "counterDecrement", userInfo: nil, repeats: true)
-         
+                
+                
+                
                 
             }
+                
             else if circle.center.x > object2MinX && circle.center.x < object2MaxX && circle.center.y > object2MinY && circle.center.y < object2MaxY   {
-     
+                
+               
+                
                 swapping(circle, subObject: object2)
                 
                 objectHide()
                 
                 counterView.hidden = false
-         
+                
+                
                 counterLabel.text = String(counter)
                 
                 timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "counterDecrement", userInfo: nil, repeats: true)
-
+                
+                
+                
+                
+              
+                
             }
 
             else if circle.center.x > object3MinX && circle.center.x < object3MaxX && circle.center.y > object3MinY && circle.center.y < object3MaxY   {
@@ -283,11 +358,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 objectHide()
                 
                 collectionViewContainer.hidden = false
- 
+                
+                
+                
                 UIView.animateWithDuration(1.0, animations: {
                     
                     self.collectionViewContainer.center.y -= self.view.center.y
                 })
+                
                 
                 
             }
@@ -299,31 +377,40 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 objectHide()
                 
                 collectionViewContainer.hidden = false
-       
+                
+                
+                
                 UIView.animateWithDuration(1.0, animations: {
                     
                     self.collectionViewContainer.center.y -= self.view.center.y
                     
                     })
-     
+                
+                
                 
             }
-     
+                
+            
+            
             else if circle.center.x > object5MinX && circle.center.x < object5MaxX && circle.center.y > object5MinY && circle.center.y < object5MaxY   {
                 
                 
                 swapping(circle, subObject: object5)
-        
+            
             
             
             }
-  
+        
+            
+    
             else if circle.center.x > object6MinX && circle.center.x < object6MaxX && circle.center.y > object6MinY && circle.center.y < object6MaxY   {
                 
                 swapping(circle, subObject: object6)
                 
             }
-
+            
+            
+            
             else {
                 
                 circle.center = self.view.center
@@ -334,33 +421,43 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 circle.bounds.size.height = 70
                 roundObjects(circle)
             }
-  
+            
+            
+            
+            
             
         }
         
-    }
+        
 
+        
+        
+        
+        
+    }
+    
         
    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         
+        
+        
         return 1
     }
     
-        func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == exploreCollectionView{
         
             return 10
         }
         else {
-            
             return 8
             
         }
         
     }
-    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         
@@ -379,7 +476,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         
         else {
-            
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as UICollectionViewCell
             
             
@@ -393,9 +489,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         
     }
+    
 
     
     //object hidden
+    
     func objectHide() {
         
         
@@ -420,6 +518,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     
     //object Show
+    
     func objectShow() {
         
         
@@ -433,12 +532,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         
     }
-
+    
+    
+    
+    
     
     func roundObjects(objectName: UIView){
         objectName.layer.cornerRadius = objectName.bounds.size.width/2
     }
- 
+    
+    
     
     func swapping(mainObject: UIView, subObject: UIView) {
         
@@ -446,6 +549,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         mainObject.center.y = subObject.center.y
         
         subObject.center = view.center
+        
         
         
     }
@@ -463,7 +567,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     
     func counterDecrement() {
-
+        
+        
         
         counterLabel.text = String(counter--)
         if counter  < -1 {
@@ -516,6 +621,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             
            
         }
+    
+    
+
+    
+   
+
+    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
 
 }
 
